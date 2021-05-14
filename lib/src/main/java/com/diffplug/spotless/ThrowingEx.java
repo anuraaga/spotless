@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 DiffPlug
+ * Copyright 2016-2021 DiffPlug
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.diffplug.spotless;
 
+import java.io.Serializable;
+
 /**
  * Basic functional interfaces which throw exception, along with
  * static helper methods for calling them.
@@ -28,6 +30,12 @@ public final class ThrowingEx {
 	/** A function that can throw any exception. */
 	@FunctionalInterface
 	public interface Function<T, R> {
+		R apply(T input) throws Exception;
+	}
+
+	/** A function that can throw any exception and is Serializable. Generally should be a reference to a static method. */
+	@FunctionalInterface
+	public interface SerializableFunction<T, R> extends Serializable {
 		R apply(T input) throws Exception;
 	}
 

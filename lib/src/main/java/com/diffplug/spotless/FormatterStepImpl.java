@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2020 DiffPlug
+ * Copyright 2016-2021 DiffPlug
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,8 +35,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 abstract class FormatterStepImpl<State extends Serializable> extends Strict<State> {
 	private static final long serialVersionUID = 1L;
 
-	/** Transient because only the state matters. */
-	final transient String name;
+	final String name;
 
 	/** Transient because only the state matters. */
 	final transient ThrowingEx.Supplier<State> stateSupplier;
@@ -59,10 +58,10 @@ abstract class FormatterStepImpl<State extends Serializable> extends Strict<Stat
 	static final class Standard<State extends Serializable> extends FormatterStepImpl<State> {
 		private static final long serialVersionUID = 1L;
 
-		final transient ThrowingEx.Function<State, FormatterFunc> stateToFormatter;
+		final ThrowingEx.SerializableFunction<State, FormatterFunc> stateToFormatter;
 		transient FormatterFunc formatter; // initialized lazily
 
-		Standard(String name, ThrowingEx.Supplier<State> stateSupplier, ThrowingEx.Function<State, FormatterFunc> stateToFormatter) {
+		Standard(String name, ThrowingEx.Supplier<State> stateSupplier, ThrowingEx.SerializableFunction<State, FormatterFunc> stateToFormatter) {
 			super(name, stateSupplier);
 			this.stateToFormatter = Objects.requireNonNull(stateToFormatter);
 		}

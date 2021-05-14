@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2020 DiffPlug
+ * Copyright 2016-2021 DiffPlug
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,12 +96,11 @@ public final class GitAttributesLineEndings {
 		}
 	}
 
-	@SuppressFBWarnings("SE_TRANSIENT_FIELD_NOT_RESTORED")
 	static class CachedEndings implements Serializable {
 		private static final long serialVersionUID = -2534772773057900619L;
 
 		/** this is transient, to simulate PathSensitive.RELATIVE */
-		transient final String rootDir;
+		final String rootDir;
 		/** the line ending used for most files */
 		final String defaultEnding;
 		/** any exceptions to that default, in terms of relative path from rootDir */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 DiffPlug
+ * Copyright 2016-2021 DiffPlug
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ public interface FormatterStep extends Serializable {
 	public static <State extends Serializable> FormatterStep createLazy(
 			String name,
 			ThrowingEx.Supplier<State> stateSupplier,
-			ThrowingEx.Function<State, FormatterFunc> stateToFormatter) {
+			ThrowingEx.SerializableFunction<State, FormatterFunc> stateToFormatter) {
 		return new FormatterStepImpl.Standard<>(name, stateSupplier, stateToFormatter);
 	}
 
@@ -108,7 +108,7 @@ public interface FormatterStep extends Serializable {
 	public static <State extends Serializable> FormatterStep create(
 			String name,
 			State state,
-			ThrowingEx.Function<State, FormatterFunc> stateToFormatter) {
+			ThrowingEx.SerializableFunction<State, FormatterFunc> stateToFormatter) {
 		Objects.requireNonNull(state, "state");
 		return createLazy(name, () -> state, stateToFormatter);
 	}

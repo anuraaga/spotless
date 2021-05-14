@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 DiffPlug
+ * Copyright 2016-2021 DiffPlug
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ import com.diffplug.spotless.ThrowingEx;
 public class EclipseBasedStepBuilder {
 	private final String formatterName;
 	private final String formatterStepExt;
-	private final ThrowingEx.Function<State, FormatterFunc> stateToFormatter;
+	private final ThrowingEx.SerializableFunction<State, FormatterFunc> stateToFormatter;
 	private final Provisioner jarProvisioner;
 
 	/**
@@ -63,12 +63,12 @@ public class EclipseBasedStepBuilder {
 	private Iterable<File> settingsFiles = new ArrayList<>();
 
 	/** Initialize valid default configuration, taking latest version */
-	public EclipseBasedStepBuilder(String formatterName, Provisioner jarProvisioner, ThrowingEx.Function<State, FormatterFunc> stateToFormatter) {
+	public EclipseBasedStepBuilder(String formatterName, Provisioner jarProvisioner, ThrowingEx.SerializableFunction<State, FormatterFunc> stateToFormatter) {
 		this(formatterName, "", jarProvisioner, stateToFormatter);
 	}
 
 	/** Initialize valid default configuration, taking latest version */
-	public EclipseBasedStepBuilder(String formatterName, String formatterStepExt, Provisioner jarProvisioner, ThrowingEx.Function<State, FormatterFunc> stateToFormatter) {
+	public EclipseBasedStepBuilder(String formatterName, String formatterStepExt, Provisioner jarProvisioner, ThrowingEx.SerializableFunction<State, FormatterFunc> stateToFormatter) {
 		this.formatterName = Objects.requireNonNull(formatterName, "formatterName");
 		this.formatterStepExt = Objects.requireNonNull(formatterStepExt, "formatterStepExt");
 		this.jarProvisioner = Objects.requireNonNull(jarProvisioner, "jarProvisioner");

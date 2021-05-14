@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2020 DiffPlug
+ * Copyright 2016-2021 DiffPlug
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public class GoogleJavaFormatIntegrationTest extends GradleIntegrationHarness {
 				"}");
 
 		setFile("test.java").toResource("java/googlejavaformat/JavaCodeUnformatted.test");
-		gradleRunner().withArguments("spotlessApply").build();
+		gradleRunner().withArguments("spotlessApply", "--stacktrace").withDebug(true).build();
 		assertFile("test.java").sameAsResource("java/googlejavaformat/JavaCodeFormatted.test");
 
 		checkRunsThenUpToDate();

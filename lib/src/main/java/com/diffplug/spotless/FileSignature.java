@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2020 DiffPlug
+ * Copyright 2016-2021 DiffPlug
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,8 +44,7 @@ public final class FileSignature implements Serializable {
 	 * Gradle only needs this class to be Serializable so it can compare FileSignature instances for
 	 * incremental builds.
 	 */
-	@SuppressFBWarnings("SE_TRANSIENT_FIELD_NOT_RESTORED")
-	private final transient List<File> files;
+	private final List<File> files;
 	private final Sig[] signatures;
 
 	/** Creates file signature whereas order of the files remains unchanged. */
